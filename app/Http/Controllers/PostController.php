@@ -16,7 +16,7 @@ class PostController extends Controller
     //
     public function getData()
     {
-        $posts = Post::with('translations');
+        $posts = Post::with('translations')->get();
 
         return datatables()->of($posts)
         ->addColumn('title',function($post){
