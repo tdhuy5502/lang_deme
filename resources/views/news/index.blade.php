@@ -5,7 +5,7 @@
         <div class="card-body">
             <div class="row">
                 <div class="col-6">
-                    <h5>News</h5>
+                    <h5>Posts</h5>
                 </div>
                 <div class="col-6 d-flex justify-content-end">
                     <div class="fl-right inline-blk">
@@ -36,14 +36,14 @@
                     data: 'id', name: 'id',
                     orderable: false, 
                 },
-                { data: 'title_vi', name: 'title_vi' },
-                { data: 'content_vi', name: 'content_vi' },
+                { data: 'title', name: 'title' },
+                { data: 'content', name: 'content' },
                 { 
                     data: 'id', 
                     name: 'action',
                     render: function(data, type, row, meta) {
                         return `
-                            <a href="/news/show/${data}" class="/btn btn-sm btn-primary">Edit</a>
+                            <a href="/posts/show/${data}" class="/btn btn-sm btn-primary">Edit</a>
                             <form action="{{ route('posts.delete', 'data') }}" method="POST" style="display:inline;">
                                 @csrf
                                 @method('DELETE')

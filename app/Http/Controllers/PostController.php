@@ -14,6 +14,19 @@ use Illuminate\Support\Facades\Log;
 class PostController extends Controller
 {
     //
+    public function getData()
+    {
+        $posts = Post::with('translations');
+
+        return datatables()->of($posts)
+        ->addColumn('title',function($post){
+            return $post->translations->pluck('title')->implode(', ');
+        })
+        ->addColumn('content',function($post){
+            return $post->translations->pluck('content')->implode(', ');
+        })->make(true);
+    }
+
     public function index()
     {
         return view('news.index');
@@ -43,8 +56,8 @@ class PostController extends Controller
             }
             DB::commit();
 
-            $postData = new PostResource($post);
-            return response()->json($postData,200);
+            // $postData = new PostResource($post);
+            return redirect()->route('posts.index');
         }
         catch(Exception $e)
         {
@@ -56,7 +69,7 @@ class PostController extends Controller
 
     public function show(Request $request)
     {
-        $post = Post::with('translations')->findOrFail($request->id);
+        $post = Post::with('translations')->find($request->id);
         // dd($post->translations);
         return view('news.edit')->with([
             'post' => $post
@@ -95,8 +108,22 @@ class PostController extends Controller
         }
     }
 
-    public function delete()
+    public function destroy(Request $request)
     {
+        try
+        {
+            DB::beginTransaction();
+            $post = Post::with('translations')->find($request->id);
+            $post->delete();
+            DB::commit();
 
+            return redirect()->route('posts.index');
+        }
+        catch(Exception $e)
+        {
+            Log::error($e);
+            DB::rollBack();
+            return redirect()->route('posts.index');
+        }
     }
 }
