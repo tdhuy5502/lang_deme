@@ -5,35 +5,35 @@
     <div class="card">
         <div class="card-body shadow">
             <h3 class="fw-bold">
-                Update News Post
+                Edit News Post
             </h3>
             <hr>
-            <form action="{{ route('posts.update',$post->id) }}" method="post" enctype="multipart/form-data">
+            <form action="{{ route('posts.update', $post->id) }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div>
                     <input type="hidden" name="id" value="{{ $post->id }}">
                     <input type="hidden" id="status" name="status" value="1">
                 </div>
             
-                <!-- Translations Add -->
+                <!-- Translations Edit -->
                 <div id="translations-container">
                     @foreach ($post->translations as $index => $translation)
-                    <div class="translation-group">
-                        <label for="translations[0][lang_id]">Language: </label>
-                        <input class="form-control" type="text" name="translations[{{ $index }}][lang_id]" value="{{ $translation->lang_id }}">
+                        <div class="translation-group">
+                            <label for="translations[{{ $index }}][lang_id]">Language: </label>
+                            <input class="form-control" type="text" name="translations[{{ $index }}][lang_id]" value="{{ $translation->lang_id }}">
             
-                        <label for="translations[0][title]">Title: </label>
-                        <input class="form-control" type="text" name="translations[{{ $index }}][title]" value="{{ $translation->title }}">
+                            <label for="translations[{{ $index }}][title]">Title: </label>
+                            <input class="form-control" type="text" name="translations[{{ $index }}][title]" value="{{ $translation->title }}">
             
-                        <label for="translations[0][content]">Content: </label>
-                        <textarea class="form-control" name="translations[{{ $index }}][content]">{{ old('translations[$index][content]',$translation->content) }}</textarea>
-                    </div> 
+                            <label for="translations[{{ $index }}][content]">Content: </label>
+                            <textarea class="form-control" name="translations[{{ $index }}][content]">{{ $translation->content }}</textarea>
+                        </div>
                     @endforeach
                     <button id="add-translation" type="button" class="btn btn-primary mt-2">Add Translation</button>
                 </div>
                 <hr>
                 <div>
-                    <button class="btn btn-primary" type="submit">Save</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
                     <a href="{{ route('posts.index') }}" class="btn btn-dark">Cancel</a>
                 </div>
             </form>

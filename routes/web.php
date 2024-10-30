@@ -11,18 +11,18 @@ Route::get('/', function () {
 
 
 
-// Route::controller(PostController::class)
-// ->prefix('/posts')
-// ->as('posts.')
-// ->group(function(){
-//     Route::get('','index')->name('index');
-//     Route::get('/data','getData')->name('getData');
-//     Route::get('/create','create')->name('create');
-//     Route::post('/store','store')->name('store');
-//     Route::get('/show/{id}','show')->name('show');
-//     Route::post('/{id}/update','update')->name('update');
-//     Route::delete('{id}','destroy')->name('delete');
-// });
+Route::controller(PostController::class)
+->prefix('/posts')
+->as('posts.')
+->group(function(){
+    Route::get('','index')->name('index');
+    Route::get('/data','getData')->name('getData');
+    Route::get('/create','create')->name('create');
+    Route::post('/store','store')->name('store');
+    Route::get('/show/{id}','show')->name('show');
+    Route::post('/{id}/update','update')->name('update');
+    Route::delete('{id}','destroy')->name('delete');
+});
 
 Route::controller(ClientNewsController::class)
 ->prefix('/top-news')
