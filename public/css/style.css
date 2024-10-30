@@ -1,0 +1,35 @@
+.news-image img {
+    width: 100%;
+    height: auto;
+}
+
+.headline {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.sub-news-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.sidebar-news {
+    font-size: 1rem;
+}
+
+.ad-banner img {
+    width: 100%;
+    height: auto;
+}
+
+.news-card {
+    margin-bottom: 20px;
+}
+
+.weather-info {
+    display: flex;
+    justify-content: space-between;
+    background-color: #f8f9fa;
+    padding: 10px;
+    margin-bottom: 20px;
+}
